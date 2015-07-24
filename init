@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo -e "\033[1m=============================
+  hostname: \033[32m$(hostname -I)\033[39m
+=============================\033[0m\n"
+
+ROOT_PATH=/usr/local/lib/http-router
+CONFIG_PATH=${ROOT_PATH}/config
+
+ln -s $CONFIG_PATH/supervisor.http-router.conf /etc/supervisor/conf.d/http-router.conf
+ln -s $CONFIG_PATH/supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
+rm /etc/nginx/nginx.conf
+ln -s $CONFIG_PATH/nginx.conf /etc/nginx/nginx.conf
+
+case "$1" in
+    start)
+        /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+        ;;
+    *)
+        if [ -x $1 ]; then
+            prog=$1
+            shift 1
+            $prog $@
+        else
+            prog=$(which $1)
+            if [ -n "${prog}" ]; then
+                shift 1
+                $prog $@
+            fi
+        fi
+        exit 1
+        ;;
+esac
+
+exit 0
