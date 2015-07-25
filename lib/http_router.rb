@@ -6,5 +6,6 @@ module HttpRouter
 
   module Backend
     autoload :Base,       'http_router/backend/base'
+    autoload :TCP,        'http_router/backend/tcp'
   end
 end
