@@ -1,8 +1,9 @@
 # HttpRouter module
 #
 module HttpRouter
-  autoload :Application, 'http_router/application'
-  autoload :Backend,     'http_router/backend'
+  autoload :Application,    'http_router/application'
+  autoload :Backend,        'http_router/backend'
+  autoload :SSLCertificate, 'http_router/ssl_certificate'
 
   module Backend
     autoload :Base,       'http_router/backend/base'
