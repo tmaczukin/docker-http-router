@@ -1,10 +1,23 @@
 module HttpRouter
   describe Application do
 
-    it 'should set name while creating object' do
-      app = Application.new('example')
+    context 'general' do
+      subject do
+        -> {Application.new('example')}
+      end
 
-      expect(app.name).to eq('example')
+      it 'should set name while creating object' do
+        app = subject.call
+
+        expect(app.name).to eq('example')
+      end
+
+      it 'should have ability to set error_page content' do
+        app = subject.call
+        app.error_page = "<html><body><h1>Error</h1></body></html>"
+
+        expect(app.error_page).to match(/<html><body><h1>Error<\/h1><\/body><\/html>/)
+      end
     end
 
     context 'hostnames' do

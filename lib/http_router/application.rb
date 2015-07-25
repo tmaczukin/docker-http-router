@@ -2,7 +2,8 @@ module HttpRouter
   # Application class
   #
   class Application
-    attr_reader :name, :ssl_required, :hostnames, :backends
+    attr_reader   :name, :ssl_required, :hostnames, :backends
+    attr_accessor :error_page
 
     def initialize(name)
       @name = name.to_s
