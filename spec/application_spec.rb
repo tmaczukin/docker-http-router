@@ -53,5 +53,21 @@ module HttpRouter
         end
       end
     end
+
+    context 'requireing SSL' do
+      it 'should have ability to mark application as "SSL required"' do
+        app = Application.new('example')
+        app.ssl_required = true
+
+        expect(app.ssl_required).to be true
+      end
+
+      it 'should set ssl_required to true only if the argument is boolean TRUE' do
+        app = Application.new('example')
+        app.ssl_required = 'test'
+
+        expect(app.ssl_required).to be false
+      end
+    end
   end
 end
