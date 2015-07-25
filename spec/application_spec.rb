@@ -119,6 +119,71 @@ module HttpRouter
       end
     end
 
+    context 'ssl_certificates' do
+      before do
+        @ssl_cert_1 = SSLCertificate.new('key_1', 'content_1', ['example.com'])
+        @ssl_cert_2 = SSLCertificate.new('key_2', 'content_2', ['www.example.com'])
+
+        class Application
+          attr_writer :ssl_certificates, :hostnames
+        end
+      end
+
+      subject do
+        lambda do
+          app = Application.new('example')
+          app.ssl_certificates = [
+            @ssl_cert_1,
+            @ssl_cert_2
+          ]
+          app.hostnames = [
+            'example.com',
+            'www.example.com'
+          ]
+          app
+        end
+      end
+
+      describe '#add_ssl_certificate' do
+        it 'should update ssl_certificates array while adding new ssl_certificate' do
+          ssl_cert_3 = SSLCertificate.new('key_3', 'content_3', ['ssl.example.com'])
+
+          app = subject.call
+          app.add_ssl_certificate(ssl_cert_3)
+
+          expect(app.ssl_certificates).to include(ssl_cert_3)
+          expect(app.ssl_certificates.count).to eq(3)
+        end
+
+        it 'shouldn\'t modify ssl_certificates array while adding existing ssl_certificate' do
+          app = subject.call
+          app.add_ssl_certificate(@ssl_cert_1)
+
+          expect(app.ssl_certificates).to include(@ssl_cert_1)
+          expect(app.ssl_certificates.count).to eq(2)
+        end
+
+        it 'should add ssl_certificate hostnames which didn\'t existed in hostnames array' do
+          ssl_cert_3 = SSLCertificate.new('key_3', 'content_3', ['ssl.example.com'])
+
+          app = subject.call
+          app.add_ssl_certificate(ssl_cert_3)
+
+          expect(app.hostnames).to include('ssl.example.com')
+        end
+      end
+
+      describe '#ssl_certificates' do
+        it 'should return all added ssl_certificates' do
+          app = subject.call
+
+          expect(app.ssl_certificates[0]).to eq(@ssl_cert_1)
+          expect(app.ssl_certificates[1]).to eq(@ssl_cert_2)
+          expect(app.ssl_certificates.count).to eq(2)
+        end
+      end
+    end
+
     context 'requireing SSL' do
       it 'should have ability to mark application as "SSL required"' do
         app = Application.new('example')
