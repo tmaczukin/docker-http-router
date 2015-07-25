@@ -2,9 +2,10 @@ module HttpRouter
   # Application class
   #
   class Application
-    attr_reader :hostnames
+    attr_reader :hostnames, :name
 
-    def initialize
+    def initialize(name)
+      @name = name.to_s
       @hostnames = []
     end
 
