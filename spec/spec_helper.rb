@@ -4,6 +4,8 @@ SimpleCov.start { add_filter '/spec' }
 require 'bundler/setup'
 Bundler.require
 
+require_relative '../lib/http_router'
+
 RSpec.configure do |config|
   config.profile_examples = 2
   config.order = :random
