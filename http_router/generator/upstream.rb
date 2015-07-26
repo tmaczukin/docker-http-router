@@ -7,7 +7,7 @@ module HttpRouter
       end
 
       def generate
-#        return '' if @application.backends.empty?
+        return '' if @application.backends.empty?
 
         output = <<EOUPSTREAM
 upstream #{name} {
