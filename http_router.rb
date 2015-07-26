@@ -2,9 +2,7 @@
 #
 module HttpRouter
   autoload :Application,    './http_router/application'
-  autoload :Backend,        './http_router/backend'
   autoload :SSLCertificate, './http_router/ssl_certificate'
-  autoload :Generator,      './http_router/generator'
 
   module Backend
     autoload :TCP,        './http_router/backend/tcp'
