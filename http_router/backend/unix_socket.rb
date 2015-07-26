@@ -1,6 +1,6 @@
 module HttpRouter
   module Backend
-    class UnixSocket < Base
+    class UnixSocket
       attr_reader :path
 
       def initialize(path)

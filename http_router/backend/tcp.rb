@@ -2,7 +2,7 @@ require 'resolv'
 
 module HttpRouter
   module Backend
-    class TCP < Base
+    class TCP
       attr_reader :ip, :port
 
       def initialize(ip, port)

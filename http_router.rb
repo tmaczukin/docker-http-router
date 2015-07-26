@@ -7,7 +7,6 @@ module HttpRouter
   autoload :Generator,      './http_router/generator'
 
   module Backend
-    autoload :Base,       './http_router/backend/base'
     autoload :TCP,        './http_router/backend/tcp'
     autoload :UnixSocket, './http_router/backend/unix_socket'
   end
