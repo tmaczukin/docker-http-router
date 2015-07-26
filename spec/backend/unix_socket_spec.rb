@@ -1,4 +1,4 @@
-require 'backend/base.rb'
+require 'backend/shared_examples/base.rb'
 
 module HttpRouter
   module Backend
