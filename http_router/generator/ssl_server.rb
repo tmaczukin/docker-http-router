@@ -10,17 +10,16 @@ module HttpRouter
           output << generate_server(certificate, index)
         end
 
-        output.join("\n")
+        output.compact.join("\n").strip
       end
 
       private
 
       def generate_server(certificate, id)
-        hostnames = certificate.hostnames.join(' ')
-        <<EOSERVER
+        output = <<EOSERVER
 server {
   listen 443 ssl;
-  server_name #{hostnames};
+  server_name #{certificate.hostnames.join(' ')};
 
   ssl_certificate ssl/app_#{@application.name}_cert_#{id}.crt;
   ssl_certificate_key ssl/app_#{@application.name}_cert_#{id}.key;
@@ -31,6 +30,8 @@ server {
   }
 }
 EOSERVER
+
+        output.strip
       end
     end
   end

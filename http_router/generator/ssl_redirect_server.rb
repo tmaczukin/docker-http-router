@@ -5,7 +5,7 @@ module HttpRouter
       def generate
         return '' unless @application.ssl_required
 
-        <<EOSERVER
+        output = <<EOSERVER
 server {
   listen 80;
   server_name #{hostnames};
@@ -14,6 +14,7 @@ server {
 }
 EOSERVER
 
+        output.strip
       end
     end
   end

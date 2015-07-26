@@ -9,11 +9,13 @@ module HttpRouter
       def generate
 #        return '' if @application.backends.empty?
 
-        <<EOUPSTREAM
+        output = <<EOUPSTREAM
 upstream #{name} {
 #{server_list}
 }
 EOUPSTREAM
+
+        output.strip
       end
 
       def name

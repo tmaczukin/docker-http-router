@@ -15,10 +15,10 @@ module HttpRouter
 
       def generate
         output = <<EOCONFIGURATION
-#{@upstream.generate.strip}
-#{@default_server.generate.strip}
-#{@ssl_redirect_server.generate.strip}
-#{@ssl_server.generate.strip}
+#{@upstream.generate}
+#{@default_server.generate}
+#{@ssl_redirect_server.generate}
+#{@ssl_server.generate}
 EOCONFIGURATION
 
         output.strip

@@ -11,7 +11,7 @@ module HttpRouter
         return '' if @application.ssl_required
         return '' if @application.hostnames.empty?
 
-        <<EOSERVER
+        output = <<EOSERVER
 server {
   listen 80;
   server_name #{hostnames};
@@ -22,6 +22,8 @@ server {
   }
 }
 EOSERVER
+
+        output.strip
       end
 
       private
