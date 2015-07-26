@@ -7,6 +7,7 @@ module HttpRouter
 
     def initialize(name)
       @name = name.to_s
+      @ssl_required = false
       @hostnames = []
       @backends = []
       @ssl_certificates = []
