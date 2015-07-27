@@ -16,4 +16,16 @@ module HttpRouter
     autoload :SSLRedirectServer, './http_router/generator/ssl_redirect_server'
     autoload :SSLServer,         './http_router/generator/ssl_server'
   end
+
+  module Serializator
+    autoload :Application, './http_router/serializator/application'
+    autoload :SSL,         './http_router/serializator/ssl'
+    autoload :Backend,     './http_router/serializator/backend'
+
+    module Backend
+      autoload :Base,       './http_router/serializator/backend/base'
+      autoload :TCP,        './http_router/serializator/backend/tcp'
+      autoload :UnixSocket, './http_router/serializator/backend/unix_socket'
+    end
+  end
 end

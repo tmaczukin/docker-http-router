@@ -1,0 +1,34 @@
+---
+name: example
+ssl_required: true
+hostnames:
+  - example.com
+  - www.example.com
+backends:
+  - type: tcp
+    ip: 127.0.0.2
+    port: 8888
+  - type: unix_socket
+    path: /tmp/application.sock
+ssl_certificates:
+  - certificate: |-
+      certificate
+      content
+    key: |-
+      key
+      content
+    hostnames:
+      - example.com
+      - www.example.com
+  - certificate: |-
+      certificate
+      content
+    key: |-
+      key
+      content
+    ca_certificates: |-
+      ca
+      certificate
+      content
+    hostnames:
+      - ssl.example.com

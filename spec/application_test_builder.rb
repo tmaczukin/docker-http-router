@@ -10,10 +10,12 @@ module ApplicationTestBuilder
   end
 
   def add_certificates
-    @cert_1 = HttpRouter::SSLCertificate.new('key content', 'certificate content',
+    @cert_1 = HttpRouter::SSLCertificate.new("key\ncontent", "certificate\ncontent",
                                              ['example.com', 'www.example.com'])
-    @cert_2 = HttpRouter::SSLCertificate.new('key content', 'certificate content',
+    @cert_2 = HttpRouter::SSLCertificate.new("key\ncontent", "certificate\ncontent",
                                              ['ssl.example.com'])
+    @cert_2.ca_certificates = "ca\nbundle\ncertificates"
+
     @app.add_ssl_certificate(@cert_1)
     @app.add_ssl_certificate(@cert_2)
   end

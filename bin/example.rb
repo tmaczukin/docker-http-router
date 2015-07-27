@@ -22,4 +22,7 @@ app.add_ssl_certificate(cert_2)
 application_generator = HttpRouter::Generator::Application.new(app)
 puts application_generator.generate
 
+application_serializator = HttpRouter::Serializator::Application.create_from_application(app)
+puts application_serializator.serialize
+
 #binding.pry
